@@ -8,4 +8,5 @@ Thermal comfort is calculated conventionally with the Fanger's mathematical mode
 2. Out of 70 features influencing thermal comfort given in data set, only those six standard features are selected which are used to calculate Fanger's Model
 3. Hyperparameter tuning is done with RandomizedSearch Cross Validation among SVM, random forest, and logistic Regression with different arguments of each algorithm respectively out of which SVM with arguments (kernel='linear',C=10) gave accuracy of 93% 
 4. Built a front end User Interface with the help of StreamLit Framework by converting the python file into pickle document
-![picture](Thermal-Comfort-prediction-APP/Screenshot.PNG)
+
+![Screenshot](https://user-images.githubusercontent.com/44450467/101834151-419ecc00-3b3a-11eb-95f6-63f464db7c69.PNG)
