@@ -20,7 +20,7 @@ classifier=pickle.load(pickle_in)
 
 #@app.route('/')
 def welcome():
-    return 'welcome sharif bhai'
+    return 'welcome sharif'
 
 #@app.route('/predict',methods=["Get"])
 
@@ -71,28 +71,30 @@ def thermal_comfort_prediction(clo_insulation,metabolic_rate,air_temparature,rad
 def main():
     st.title("Thermal Comfort Prediction")
     html_temp = """
-    <div style="background-color:tomato;padding:10px">
-    <h2 style="color:white;text-align:center;">Thermal Comfort Prediction ML App </h2>
+   <body style="background-color:#800080;">
+      <div style="background-color:tomato;padding:10px">
+      <h2 style="color:white;text-align:center;">Thermal Comfort Prediction ML App </h2>
     </div>
+   </body>
     """
     st.markdown(html_temp,unsafe_allow_html=True) 
     
-    air_temparature=st.text_input('Air Temparature °C')
-    radiant_temparature=st.text_input('Radiant Temparature °C')
-    relative_humidity=st.text_input('Relative Humidity %')
-    air_velocity=st.text_input('Air Velocity m/s')
-    clo_insulation=st.text_input('Clo Insulation Clo')
-    metabolic_rate=st.text_input('Metabolic Rate Met')
+    air_temparature=st.text_input('Air Temparature (°C)')
+    radiant_temparature=st.text_input('Radiant Temparature (°C)')
+    relative_humidity=st.text_input('Relative Humidity (%)')
+    air_velocity=st.text_input('Air Velocity (m/s)')
+    clo_insulation=st.text_input('Clothing Insulation (Clo) (0.0 - 2.5)')
+    metabolic_rate=st.text_input('Metabolic Rate (Met) (0.5 - 5.0)')
     result=""
     
     comfortable_html="""
     <div style="background-color:#F4D03F;padding:10px">
-    <h2 style="color:white;text-align:center;">Thermally Comfortable [-1,0,+1] </h2>
+    <h2 style="color:white;text-align:center;">Thermally Comfortable [ranges in (-1,0,+1)] </h2>
     </div>
     """
     uncomfortable_html="""
     <div style="background-color:#F00000;padding:10px">
-    <h2 style="color:white;text-align:center;">Thermally Uncomfortable [-3,-2 and +2,+3]</h2>
+    <h2 style="color:white;text-align:center;">Thermally Uncomfortable [ranges in (-3,-2 and +2,+3)]</h2>
     </div>
     """
     
@@ -100,14 +102,15 @@ def main():
     if st.button("Predict"):
         result=thermal_comfort_prediction(clo_insulation,metabolic_rate,air_temparature,radiant_temparature,relative_humidity,air_velocity)
         st.success('The output is {}'.format(result))       
-        if result in range(-1,1,1):
+        if result in range(-1,1):
             st.markdown(comfortable_html,unsafe_allow_html=True)
         else:
             st.markdown(uncomfortable_html,unsafe_allow_html=True)
           
     if st.button("About"):
-        st.text("Lets LEarn")
-        st.text("Built with Streamlit")
+        st.text("This is a thermal comfort prediction app which uses Machine Learning algorithm")
+        st.text("Built on Python by using streamlit framework")
+        st.text("By Mohammed Shareef")
           
 
 if __name__=='__main__':
